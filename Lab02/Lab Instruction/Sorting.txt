@@ -1,0 +1,211 @@
+public class Sorting {
+    static void  swap (int [] A, int i, int j)
+    {  int temp = A[i];
+	 A[i] = A[j];
+	 A[j] = temp;
+    }
+    
+    static void printArray(int [] A)
+    {   for (int i = 0; i < A.length; i++) 
+        { System.out.print(A[i]+ " ");
+        }  
+        System.out.println();
+    }
+    
+    static int findIndexSmallest(int [] A, int start, int end)
+    { 
+         int minIndex=start; // Index of smallest remaining value.
+	   for (int j = start ; j < end; j++)  
+           { if (A[minIndex] > A[j])  
+		 minIndex = j; // Remember index of new minimum
+	   }
+           return minIndex;
+    }
+
+   
+    //Ex1  Complete the method SelectionSort
+    static void SelectionSort(int[] A) {
+	for (int i = 0; i < A.length - 1; i++) {
+	   int minIndex = i; // Index of smallest remaining value.
+           minIndex = findIndexSmallest(A, i, A.length);
+           //Complete this method. Note that the method swap is provided.
+
+    
+	}
+    }
+
+
+    //Ex2 Complete the method InsertionSort
+    static void InsertionSort(int[] A) {
+       for (int i = 1; i < A.length; i++) {
+	    for (int j = 0; j< i; j++) {
+		  //Complete this method. Note the method swap is provided.
+
+
+	     }
+	 }
+	}
+
+  
+  
+  private static void RecursiveMergeSort(int[] A) {
+    int inputLength = A.length;
+    if (inputLength < 2)
+        return;
+    
+    int midIndex = inputLength / 2;
+    int[] leftHalf = new int[midIndex];
+    int[] rightHalf = new int[inputLength - midIndex];
+
+    for (int i = 0; i < midIndex; i++) {
+        leftHalf[i] = A[i];
+    }
+    for (int i = midIndex; i < inputLength; i++) {
+        rightHalf[i - midIndex] = A[i];
+    }
+    //Ex3 Complete method RecursiveMergeSort
+    //Call RecursiveMergeSort for leftHalf, rightHalf, and merge them. Note the method merge is provided.
+  
+
+
+}
+ 
+  //The method merge sorts two sorted arrays leftHalf and rightHalf.
+private static void merge(int[] A, int[] leftHalf, int[] rightHalf) {
+    int leftSize = leftHalf.length;
+    int rightSize = rightHalf.length;
+    int i = 0, j = 0, k = 0;
+
+    while (i < leftSize && j < rightSize) {
+        if (leftHalf[i] < rightHalf[j]) {
+            A[k] = leftHalf[i];
+            i++;
+            k++;
+        } else {
+            A[k] = rightHalf[j];
+            j++;
+            k++;
+        }  
+    }
+   while (i < leftSize) {  
+        A[k] = leftHalf[i];
+        i++;
+        k++;
+    }
+    while (j < rightSize) {
+        A[k] = rightHalf[j];
+        j++;
+        k++;
+    }
+}
+
+   
+static void RecursiveQuickSort(int[] A, int start, int end) 
+  { 
+//start = the start index and end = end index
+  { if(start <end )
+    {
+    int pivot = A[end];
+    int [] L = new int[A.length];
+    int [] R = new int[A.length];
+    int l_count=0;
+    int r_count=0;
+    for(int i=start; i< end; i++)
+    {  if(A[i]<pivot)
+       { L[l_count]=A[i];
+          l_count++;
+       }
+       else
+        { R[r_count]=A[i];
+          r_count++;
+       }
+    }
+    
+    for(int i=0; i<l_count; i++)
+    { A[start+i]=L[i];
+    }
+    A[l_count+start]=pivot;
+    for(int i=0; i< r_count; i++)
+    { A[l_count+start+i+1]=R[i];
+    }
+    //Ex4.  Complete the method RecursiveQuickSort
+    //Call itself for sorting the leftHalf and the rightHalf
+ 
+
+
+ }
+
+
+   
+  public static void main(String [] args)
+    {  
+   /*int [] A = {45, 12, 89, 36, 64, 22, 75, 51, 9};
+       
+       System.out.println("Your Solution is ");
+       printArray(A);
+       SelectionSort(A);
+       System.out.println("The correct answer is \n"
+       + "45 12 89 36 64 22 75 51 9 \n" +
+        "9 12 89 36 64 22 75 51 45 \n" +
+        "9 12 22 36 64 89 75 51 45 \n" +
+        "9 12 22 36 45 89 75 51 64 \n" +
+        "9 12 22 36 45 51 75 89 64 \n" +
+        "9 12 22 36 45 51 64 89 75 \n" +
+        "9 12 22 36 45 51 64 75 89" );
+
+*/
+ /*
+       int [] B = {45, 12, 89, 36, 64, 22, 75, 51, 9};
+      System.out.println("\nInsertion Sort");
+      System.out.println("Your Solution is ");
+      printArray(B);
+      InsertionSort(B);
+      System.out.println("\nThe Correct Answer is \n" 
+          +"45 12 89 36 64 22 75 51 9 \n" 
+          +"12 45 89 36 64 22 75 51 9 \n"
++"12 36 89 45 64 22 75 51 9 \n"
++"12 36 45 89 64 22 75 51 9 \n"
++"12 36 45 64 89 22 75 51 9 \n"
++"12 22 45 64 89 36 75 51 9 \n"
++"12 22 36 64 89 45 75 51 9 \n"
++"12 22 36 45 89 64 75 51 9 \n"
++"12 22 36 45 64 89 75 51 9 \n"
++"12 22 36 45 64 75 89 51 9 \n"
++"12 22 36 45 51 75 89 64 9 \n"
++"12 22 36 45 51 64 89 75 9 \n"
++"12 22 36 45 51 64 75 89 9 \n"
++"9 22 36 45 51 64 75 89 12 \n"
++"9 12 36 45 51 64 75 89 22 \n"
++"9 12 22 45 51 64 75 89 36 \n"
++"9 12 22 36 51 64 75 89 45 \n"
++"9 12 22 36 45 64 75 89 51 \n"
++"9 12 22 36 45 51 75 89 64 \n"
++"9 12 22 36 45 51 64 89 75 \n"
++"9 12 22 36 45 51 64 75 89 \n"
+  );
+      */
+        /*
+            int [] C = {45, 12, 89, 36, 64, 22, 75, 51, 9};
+      printArray(C);
+      System.out.println("\nMerge Sort");
+      System.out.println("Your Solution is ");
+      RecursiveMergeSort(C);
+      printArray(C);
+      System.out.println("\nThe Correct Answer is \n"+ 
+            "9 12 22 36 45 51 64 75 8\n");
+    */
+        /*
+      int [] D = {45, 12, 89, 36, 64, 22, 75, 51, 9};      
+      printArray(D);
+      System.out.println("\nQuick Sort");
+      System.out.println("Your Solution is ");
+      RecursiveQuickSort(D, 0, D.length-1 );
+      printArray(D);
+      System.out.println("\nThe Correct Answer is \n"+ 
+            "9 12 22 36 45 51 64 75 89\n"); 
+*/
+
+    
+    }
+   
+}
