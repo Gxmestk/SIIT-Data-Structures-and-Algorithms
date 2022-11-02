@@ -153,7 +153,12 @@ public class BST<T extends Comparable<T>> extends BT<T> {
 				maxleft = maxleft.right;
 			}
 			current.element = maxleft.element;
-			if (maxleft.left == null && maxleft.right == null) { // Case 3.1 if maxleft is a leave, then ..
+
+			if (maxleftParent == current) { // Case 3.3 if maxleft is leftchild of current, then ..
+				//insert your code
+				maxleftParent.left = maxleft.left;
+			}
+			else if (maxleft.left == null && maxleft.right == null) { // Case 3.1 if maxleft is a leave, then ..
 				//insert your code
 				maxleftParent.right = null;
 			} 
@@ -161,10 +166,6 @@ public class BST<T extends Comparable<T>> extends BT<T> {
 				//insert your code
 				maxleftParent.right = maxleft.left;
 			} 
-			else if (maxleftParent == current) { // Case 3.3 if maxleft is leftchild of current, then ..
-				//insert your code
-				maxleftParent.left = maxleft.left;
-			}
 		}
 		size--;
 		return temp;
